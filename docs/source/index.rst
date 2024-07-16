@@ -18,5 +18,5 @@ Contents
 
 .. toctree::
 
-   usage
-   api
+   story_001
+   story_002
