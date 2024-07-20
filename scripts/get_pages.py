@@ -10,6 +10,7 @@ def fetch_webpage_content(url):
     try:
         response = requests.get(url)
         response.raise_for_status()  # 检查请求是否成功
+        response.encoding = response.apparent_encoding
         return response.text
     except requests.RequestException as e:
         print(f"请求网页时发生错误：{e}")
@@ -25,6 +26,7 @@ def extract_main_content(html):
 def main(url):
     """主函数，整合上述功能"""
     html_content = fetch_webpage_content(url)
+    print(html_content)
     if html_content:
         main_text = extract_main_content(html_content)
         print(main_text)
@@ -32,5 +34,5 @@ def main(url):
         print("无法获取网页内容。")
 
 if __name__ == "__main__":
-    url = "http://example.com"  # 替换为您要爬取的网页URL
+    url = "https://www.ppzuowen.com/book/shaoergushi/zhentanxiaogushi/"  # 替换为您要爬取的网页URL
     main(url)
