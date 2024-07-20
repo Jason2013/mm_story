@@ -9,6 +9,7 @@
             "type": "debugpy",
             "request": "launch",
             "program": "${workspaceFolder}/scripts/get_pages.py",
+            "cwd": "${workspaceFolder}/scripts",
             "console": "integratedTerminal"
         }
     ]

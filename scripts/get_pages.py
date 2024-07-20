@@ -6,6 +6,7 @@
 # 3、找到正文（注意：正文中有粗体字）
 # 4、写入 markdown 文件。
 
+import os
 import requests
 from bs4 import BeautifulSoup
 
@@ -42,14 +43,27 @@ def find_links(soup):
     
     return rs
 
-def save_page(url):
+def save_page(url, file_name):
     html_content = fetch_webpage_content(url)
     assert html_content
 
     page = extract_main_content(html_content)
 
-    title = page.find("h2", class_="articleH2")
-    print(title.text)
+    title = page.find("h2", class_="articleH2").text
+    # print(title.text)
+
+    content = page.find("div", class_="articleContent")
+    paragraphs = content.find_all("p")
+    ps = [p.text for p in paragraphs]
+    # for p in paragraphs:
+    #     print(p.text)
+
+    # print(title.text)
+    with open(file_name, "w", encoding="utf-8") as f:
+        f.write("%s\n" % title)
+        f.write("%s\n\n" % ('=' * (len(title)*2)))
+        for p in ps:
+            f.write("%s\n\n" % p.strip())
 
 
 def main(url):
@@ -63,7 +77,16 @@ def main(url):
     for (text, link) in links:
         print(text, link)
 
-    save_page(links[0][1])
+    base_dir = os.path.join("..", "docs", "source")
+    file_names = []
+    for i, (text, link) in enumerate(links, 1):
+        file_name = "story_{:03}".format(i)
+        file_names.append(file_name)
+        save_page(link, os.path.join(base_dir, file_name + ".rst"))
+
+    with open(os.path.join(base_dir, "index.rst"), "a", encoding="utf-8") as f:
+        for file_name in file_names:
+            f.write("   %s\n" % file_name)
 
 
 if __name__ == "__main__":
