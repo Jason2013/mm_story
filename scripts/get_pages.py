@@ -26,6 +26,8 @@ def extract_main_content(html):
 def main(url):
     """主函数，整合上述功能"""
     html_content = fetch_webpage_content(url)
+    # with open("aaa.html", "w", encoding="utf-8") as f:
+    #     f.write(html_content)
     print(html_content)
     if html_content:
         main_text = extract_main_content(html_content)
