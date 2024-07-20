@@ -33,17 +33,27 @@ def find_links(soup):
     assert ul_content
 
     # if ul_content:
+    base_url = "https://www.ppzuowen.com"
     rs = []
     li_list = ul_content.find_all("li")
     for li_item in li_list:
         a_tag = li_item.find("a")
         # print(a_tag.text)
         # print(a_tag["href"])
-        rs.append((a_tag.text, a_tag["href"]))
+        rs.append((a_tag.text, base_url + a_tag["href"]))
     
     return rs
 
     # return main_content.get_text() if main_content else "未找到正文内容"
+def save_page(url):
+    html_content = fetch_webpage_content(url)
+    assert html_content
+
+    page = extract_main_content(html_content)
+
+    title = page.find("h2", class_="articleH2")
+    print(title.text)
+    # links = find_links(main_page)
 
 def main(url):
     """主函数，整合上述功能"""
@@ -53,9 +63,11 @@ def main(url):
     main_page = extract_main_content(html_content)
     links = find_links(main_page)
 
-    base_url = "https://www.ppzuowen.com"
+    # base_url = "https://www.ppzuowen.com"
     for (text, link) in links:
-        print(text, base_url + link)
+        print(text, link)
+
+    save_page(links[0][1])
     # with open("aaa.html", "w", encoding="utf-8") as f:
     #     f.write(html_content)
     #print(html_content)
