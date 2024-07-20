@@ -20,18 +20,26 @@ def extract_main_content(html):
     """解析HTML并提取正文内容"""
     soup = BeautifulSoup(html, 'html.parser')
     # 假设正文内容在 <div> 标签中，类名为 'main-content'
-    main_content = soup.find('ul', class_='bookList')
-    return main_content.get_text() if main_content else "未找到正文内容"
+    ul_content = soup.find('ul', class_='bookList')
+
+    if ul_content:
+        li_list = ul_content.find_all("li")
+        for li_item in li_list:
+            a_tag = li_item.find("a")
+            print(a_tag.text)
+            print(a_tag["href"])
+
+    # return main_content.get_text() if main_content else "未找到正文内容"
 
 def main(url):
     """主函数，整合上述功能"""
     html_content = fetch_webpage_content(url)
     # with open("aaa.html", "w", encoding="utf-8") as f:
     #     f.write(html_content)
-    print(html_content)
+    #print(html_content)
     if html_content:
         main_text = extract_main_content(html_content)
-        print(main_text)
+        # print(main_text)
     else:
         print("无法获取网页内容。")
 
