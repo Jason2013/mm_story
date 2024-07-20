@@ -20,7 +20,7 @@ def extract_main_content(html):
     """解析HTML并提取正文内容"""
     soup = BeautifulSoup(html, 'html.parser')
     # 假设正文内容在 <div> 标签中，类名为 'main-content'
-    main_content = soup.find('div', class_='main-content')
+    main_content = soup.find('ul', class_='bookList')
     return main_content.get_text() if main_content else "未找到正文内容"
 
 def main(url):
