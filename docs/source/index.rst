@@ -1,11 +1,8 @@
 儿童睡前悬疑侦探故事
 ====================
 
-.. contents:: 目录
-   :local:
-
 .. toctree::
-   :hidden:
+   :caption: 目录
 
    story_001
    story_002
