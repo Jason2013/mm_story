@@ -1,4 +1,8 @@
+目录
+====
+
 .. toctree::
+   :caption: 目录
 
    story_001
    story_002
