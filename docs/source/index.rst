@@ -1,9 +1,5 @@
-目录
-====
-
 .. toctree::
 
-   self
    story_001
    story_002
    story_003
