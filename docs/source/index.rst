@@ -1,9 +1,12 @@
 儿童睡前悬疑侦探故事
 ====================
 
-.. toctree::
+.. contents:: 目录
+   :local:
 
-   index
+.. toctree::
+   :hidden:
+
    story_001
    story_002
    story_003
