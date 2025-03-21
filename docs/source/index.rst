@@ -4,6 +4,7 @@
 .. toctree::
    :caption: 目录
 
+   self
    story_001
    story_002
    story_003
